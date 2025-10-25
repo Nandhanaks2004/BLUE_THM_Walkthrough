@@ -25,6 +25,6 @@ This walkthrough is part of my hands-on pentesting learning path. I enjoy:
 ## Repo contents
 .
 ├─ README.md # This file
-├─ BLUE-WALKTHROUGH.md # Full step-by-step walkthrough (detailed)
+├─ BLUE-WALKTHROUGH.pdf # Full step-by-step walkthrough (detailed)
 ├─ commands.txt # Copy/paste of common commands used
 ├─ images/ # Screenshots (nmap, msf, meterpreter, hashdump)
